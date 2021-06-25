@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Data</title>
+    <link rel="shortcut icon" href="../static/images/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .card{
+            width: 30rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2%;
+            margin-bottom:5%;
+
+             -webkit-box-shadow: -2px 0px 20px -6px rgba(166,159,166,1);
+              -moz-box-shadow: -2px 0px 20px -6px rgba(166,159,166,1);
+               box-shadow: -2px 0px 20px -6px rgba(166,159,166,1);
+        }
+         @media only screen and (min-width: 340px) and (max-width: 400px) {
+             .card{
+                width:20rem;
+                margin-top:10%;
+             }
+        }
+         @media only screen and (min-width: 400px) and (max-width: 500px) {
+             .card{
+                width:22rem;
+                margin-top:10%;
+             }
+        }
+         @media only screen and (min-width: 500px) and (max-width: 600px) {
+             .card{
+                width:25rem;
+                margin-top:10%;
+             }
+        }
+        .message{
+             margin-top:1%;
+             width:100%;
+         }
+         .navbar a{
+                    font-family: 'Anonymous Pro', monospace;
+                    font-size: 25px;
+                }
+                 @media only screen and (min-width: 280px) and (max-width: 340px) {
+                  .navbar a{
+                    font-size:18px;
+                  }
+                 }
+                  @media only screen and (min-width: 340px) and (max-width: 400px) {
+                       .navbar a{
+                    font-size:20px;
+                  }
+                 }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+              <img src="../static/images/logo.png" width="30" height="30" class="d-inline-block align-top">
+              Python Bootcamp Dashboard
+            </a>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if flag %}
+
+                    <div class="alert alert-success message" align="center"><i class="bi bi-patch-check"></i> <strong>{{ message[1] }}</strong></div>
+                    <div align="center"><a href="/assignment" >Add more?</a></div>
+                {% else %}
+                    <div class="alert alert-warning message" align="center"><i class="bi bi-patch-exclamation"></i><strong> {{ message[1] }}</strong></div>
+                    <div align="center"><a href="/assignment" >Add again?</a></div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+            <div class="card-body">
+                <form action = "/add_assignment" method = "post" >
+                    <div class="form-group">
+                        <label>HackerRank ID:</label>
+                        <input type="text" class="form-control"  name="name" placeholder="Enter HackerRank ID">
+                    </div>
+                    <div class="form-group">
+                        <label >Assignment Score:</label>
+                        <input type="text" class="form-control" name="score" placeholder="Enter Score">
+                    </div>
+                    <div class="form-group">
+                        <label >Assignment Number:</label>
+                        <input type="text" class="form-control"  name="assign_no" placeholder="Enter Assignment Number">
+                    </div>
+                    <div class="form-group">
+                        <label >Total Problems:</label>
+                        <input type="text" class="form-control" name="total_problems" placeholder="Enter Total Problems">
+                    </div>
+                    <div class="form-group">
+                        <label >Solved Problems:</label>
+                        <input type="text" class="form-control" name="solved_problems" placeholder="Enter Solved Problems">
+                    </div>
+                    <div class="form-group">
+                        <label >Remarks: </label>
+<!--                        <input type="text" class="form-control" name="remark" placeholder="Enter HackerRank ID">-->
+                        <textarea name="remark" class="form-control" rows="10" cols="30">Enter Remarks..</textarea>
+                    </div>
+                    <button type="submit" value="submit" class="btn btn-primary" style="margin-left: 30.5%;">Submit</button>
+                  </form>
+            </div>
+    </div>
+</body>
+</html>
+

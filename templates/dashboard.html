@@ -1,0 +1,401 @@
+<html>
+
+    <head>
+        <title>Dashboard - epsilonpi</title>
+        <!-- Shortcut Icon -->
+        <link rel="shortcut icon" href="../static/images/favicon.png">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+        <!-- Chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+
+        <!-- Mobile View -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+       <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap" rel="stylesheet">
+        <style>
+            .container-fluid{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            }
+            .container-fluid h2{
+            font-family: 'Anonymous Pro', monospace;
+            text-decoration: underline;
+            margin-top:80px;
+
+            }
+            .container-fluid h5{
+            font-family: 'Anonymous Pro', monospace;
+            }
+            .navbar a{
+               font-family: 'Anonymous Pro', monospace;
+            }
+            .welcome-tag p{
+                font-family: 'Anonymous Pro', monospace;
+                text-align: center;
+                font-size: 50px;
+                margin-top: 2%;
+                margin-bottom: 2%;
+                color: #ED30CD;
+             }
+            @media only screen and (min-width: 340px) and (max-width: 400px) {
+                   .container-fluid h2{
+                      margin-top: 50px;
+                      font-size:25px;
+                      text-decoration: underline;
+                  }
+                  .container-fluid h5{
+                    font-size:17px;
+                   }
+                    .welcome-tag p{
+                    margin-top:30px;
+                    font-size:25px;
+
+                    }
+            }
+            @media only screen and (min-width: 400px) and (max-width: 500px) {
+                    .container-fluid h2{
+                      margin-top: 30px;
+                      font-size:25px;
+                      text-decoration: underline;
+                  }
+                  .container-fluid h5{
+                    font-size:17px;
+                   }
+                 .welcome-tag p{
+                       font-size:30px;
+
+                    }
+            }
+             @media only screen and (min-width: 500px) and (max-width: 600px) {
+                    .container-fluid h2{
+                      margin-top: 50px;
+                      font-size:25px;
+                      text-decoration: underline;
+                  }
+                  .container-fluid h5{
+                    font-size:17px;
+                   }
+                      .welcome-tag p{
+                       font-size:30px;
+
+                    }
+                }
+                @media only screen and (min-width: 600px) and (max-width: 700px) {
+                    .container-fluid h2{
+                      margin-top: 50px;
+                      font-size:25px;
+                      text-decoration: underline;
+                  }
+                  .container-fluid h5{
+                    font-size:17px;
+                   }
+                      .welcome-tag p{
+                       font-size:30px;
+
+                    }
+                }
+                .navbar a{
+                    font-family: 'Anonymous Pro', monospace;
+                    font-size: 25px;
+                }
+                 @media only screen and (min-width: 280px) and (max-width: 340px) {
+                  .navbar a{
+                    font-size:18px;
+                  }
+                 }
+                  @media only screen and (min-width: 340px) and (max-width: 400px) {
+                       .navbar a{
+                    font-size:20px;
+                  }
+                 }
+        </style>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+              <img src="../static/images/logo.png" width="30" height="30" class="d-inline-block align-top">
+              Python Bootcamp Dashboard
+            </a>
+        </nav>
+
+        <!-- Welcome Message -->
+        <div class="welcome-tag">
+            <p>Hello, {{name}}!</p>
+        </div>
+
+
+
+        <!-- Assignment Report -->
+        <div class="container-fluid">
+            <h2>Assignment Report:</h2>
+            <br>
+
+            <!-- Cards -->
+            <div class="row" style="margin-bottom: 1%;">
+                <div class="col-sm">
+                    <div class="card" style="width: auto; height: 250px;">
+                        <div class="card-body">
+                            <h5>Total Questions:</h5>
+                            <p style="text-align: center; font-size: 40px; margin-top: 50px;">{{assign_problem_list[0]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card" style="width: auto; height: 250px;">
+                        <div class="card-body">
+                            <h5>No. of questions correctly answered:</h5>
+                            <p style="text-align: center; font-size: 40px; margin-top: 50px;">{{assign_problem_list[1]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card" style="width: auto; height: 250px;">
+                        <div class="card-body">
+                            <h5>Percentage of right question answered:</h5>
+                            <p style="text-align: center; font-size: 40px; margin-top: 50px;">{{assign_problem_list[2]}}%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphs -->
+            <div class="row">
+                <!-- Assignment Rating -->
+                <div class="col-sm" style="margin-left: auto; margin-right: auto;">
+                    <div class="card" style="width: auto;">
+                        <div class="card-body">
+                            <h5>Assignment Score:</h5>
+                            <div class="container-fluid">
+                                <canvas id="myAss"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mentor Assignment Rating -->
+                <div class="col-sm" style="margin-left: auto; margin-right: auto;">
+                    <div class="card" style="width: auto;">
+                        <div class="card-body">
+                            <h5>Mentee Rating:</h5>
+                            <div class="container-fluid">
+                                <canvas id="myMentorAss"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coding Challenge Report -->
+        <div class="container-fluid">
+            <h2>Coding Challenge Report: </h2>
+            <br>
+
+            <!-- Cards -->
+            <div class="row" style="margin-bottom: 1%;">
+                <div class="col-sm">
+                    <div class="card" style="width: auto; height: 250px;">
+                        <div class="card-body">
+                            <h5>Total Questions:</h5>
+                            <p style="text-align: center; font-size: 40px; margin-top: 50px;">{{code_problem_list[0]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card" style="width: auto; height: 250px;">
+                        <div class="card-body">
+                            <h5>No. of questions correctly answered:</h5>
+                            <p style="text-align: center; font-size: 40px; margin-top: 50px;">{{code_problem_list[1]}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card" style="width: auto; height: 250px;">
+                        <div class="card-body">
+                            <h5>Percentage of right question answered:</h5>
+                            <p style="text-align: center; font-size: 40px; margin-top: 50px;">{{code_problem_list[2]}}%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphs -->
+            <div class="row">
+                <!-- Assignment Rating -->
+                <div class="col-sm" style="margin-left: auto; margin-right: auto;">
+                    <div class="card" style="width: auto;">
+                        <div class="card-body">
+                            <h5>Coding Challenge Score:</h5>
+                            <div class="container-fluid">
+                                <canvas id="myCCscore"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mentor Assignment Rating -->
+                <div class="col-sm" style="margin-left: auto; margin-right: auto;">
+                    <div class="card" style="width: auto;">
+                        <div class="card-body">
+                            <h5>Mentee Rating:</h5>
+                            <div class="container-fluid">
+                                <canvas id="myCCmentor"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mentor Remarks -->
+        <!-- <div class="container-fluid" style="margin-top: 2%;">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5>Mentor Remarks</h5>
+                </div>
+            </div>
+        </div> -->
+
+    </body>
+    
+
+    <script>
+        //Assignment Score
+        let score = document.getElementById('myAss').getContext('2d');
+
+        let asscore = new Chart(score, {
+            type: 'bar',
+            data: {
+
+                labels:[
+                  {% for item in labels_assign %}
+                   "{{ item }}",
+                  {% endfor %}
+            ],
+                datasets:[{
+                    label: 'Percentage',
+                    data:[{% for item in values_assign %}
+                       "{{ item }}",
+                      {% endfor %}
+                   ],
+                    backgroundColor: '#FF1300',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: {{max_bar}},
+                      }
+                }
+            }
+        });
+    </script>
+    <script>
+        //Mentor Rating
+        let mentor = document.getElementById('myMentorAss').getContext('2d');
+
+        let MentorGraph = new Chart(mentor, {
+            type: 'line',
+            data: {
+                labels:[
+                  {% for item in labels_assign %}
+                   "{{ item }}",
+                  {% endfor %}
+            ],
+                datasets:[{
+                    label: 'Rating',
+                    data:[{% for item in tot_score_assign %}
+                       "{{ item }}",
+                      {% endfor %}
+                   ],
+                    backgroundColor: '#FD00FF',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: {{max_line}},
+                      }
+                }
+            }
+        });
+    </script>
+    <script>
+        //Coding Challenge Score
+        let ccscore = document.getElementById('myCCscore').getContext('2d');
+
+        let CodingChallenge = new Chart(ccscore, {
+            type: 'bar',
+            data: {
+                labels:[
+                  {% for item in labels_code %}
+                   "{{ item }}",
+                  {% endfor %}
+            ],
+                datasets:[{
+                    label: 'Percentage',
+                    data:[{% for item in values_code %}
+                       "{{ item }}",
+                      {% endfor %}
+                   ],
+                    backgroundColor: '#FD00FF',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'black'
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: {{max_bar}},
+                      }
+                }
+            }
+        });
+    </script>
+    <script>
+        //Mentor CC Score
+        let mccscore = document.getElementById('myCCmentor').getContext('2d');
+
+        let MentorCodingChallenge = new Chart(mccscore, {
+            type: 'line',
+            data: {
+                labels:[
+                  {% for item in labels_code %}
+                   "{{ item }}",
+                  {% endfor %}
+            ],
+                datasets:[{
+                    label: 'Rating',
+                    data:[{% for item in tot_score_code %}
+                       "{{ item }}",
+                      {% endfor %}
+                   ],
+                    backgroundColor: 'red',
+                    hoverBorderWidth: 2,
+                    hoverBorderColor: 'red'
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                        max: {{max_line}},
+                      }
+                }
+            }
+        });
+    </script>
+</html>
+

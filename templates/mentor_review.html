@@ -1,0 +1,100 @@
+<html>
+
+    <head>
+        <title>Mentor Review - epsilonpi</title>
+        <link rel="shortcut icon" href="../static/images/logo.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap" rel="stylesheet">
+        <style>
+                .card{
+                    margin-top:20px;
+                    width: 30rem;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: auto;
+                     -webkit-box-shadow: -2px 0px 20px -6px rgba(166,159,166,1);
+                    -moz-box-shadow: -2px 0px 20px -6px rgba(166,159,166,1);
+                    box-shadow: -2px 0px 20px -6px rgba(166,159,166,1);
+                }
+                @media only screen and (min-width: 340px) and (max-width: 400px) {
+                     .card{
+                        width:20rem;
+                        margin-top:5%;
+                     }
+                }
+                 @media only screen and (min-width: 400px) and (max-width: 500px) {
+                     .card{
+                        width:22rem;
+                        margin-top:5%;
+                     }
+                }
+                 @media only screen and (min-width: 500px) and (max-width: 600px) {
+                     .card{
+                        width:25rem;
+                        margin-top:5%;
+                     }
+                }
+               .navbar a{
+                    font-family: 'Anonymous Pro', monospace;
+                    font-size: 25px;
+                }
+                 @media only screen and (min-width: 280px) and (max-width: 340px) {
+                  .navbar a{
+                    font-size:18px;
+                  }
+                 }
+                  @media only screen and (min-width: 340px) and (max-width: 400px) {
+                       .navbar a{
+                    font-size:20px;
+                  }
+                 }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+              <img src="../static/images/logo.png" width="30" height="30" class="d-inline-block align-top">
+              Python Bootcamp Dashboard
+            </a>
+        </nav>
+        <div class="div" align="center">
+            <svg width="300" height="300" >
+                <image href="../static/images/mentor.svg" height="300" width="300"/>
+            </svg>
+        </div>
+        {% with message = get_flashed_messages(with_categories=true) %}
+        {% if msg %}
+                {% if flag %}
+                    <div class="alert alert-warning message" align="center" ><i class="bi bi-patch-exclamation"></i><strong> {{ msg }}</strong></div>
+                    <div align="center" ><a href="/mentor" style=" font-family: 'Anonymous Pro', monospace;">Click here to try again?</a></div>
+                {% endif %}
+        {% endif %}
+        {% endwith %}
+        <div class="card" >
+            <div class="card-body">
+                <form action = "/mentor_login" method = "post" >
+                    <div class="form-group">
+                        <label >Login Key:</label>
+                        <input type="text" class="form-control" id="username" name="key" placeholder="Enter Login Key">
+                    </div>
+                    <div class="form-group">
+                        <label>Review Type: </label>
+                        <select class="form-control" name="review_type" >
+                            <option value="assignment"selected>Assignment</option>
+                            <option value="coding_challenge">Coding Challenge</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 30.5%;">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </body>
+
+    <script>
+
+    </script>
+
+</html>
